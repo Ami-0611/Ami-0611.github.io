@@ -8,7 +8,7 @@ def get_collection(name):
     host = os.getenv("MONGO_HOST")
     port = int(os.getenv("MONGO_PORT"))
     db_name = os.getenv("MONGO_DB")
-    col_name = os.getenv("MONGO_COL")collection.find
+    col_name = os.getenv("MONGO_COL")
     username = os.getenv("MONGO_USERNAME")
     password = os.getenv("MONGO_PASSWORD")
 
