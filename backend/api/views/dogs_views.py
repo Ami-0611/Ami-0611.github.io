@@ -7,9 +7,8 @@ from api.serializers import DogSerializer
 class DogListView(APIView):
     def get(self, request):
         collection = get_collection("dogs")
-        dogs = [
-            {**doc, "_id": str(doc["_id"])} for doc in collection.find({"rescue_type": {"$exists": True}})
-        ]
+        dogs = [{**doc, "_id": str(doc["_id"])} for doc in collection.find({})]
+        print(f"dogs count: {len(dogs)}")
         return Response(dogs)
 
     def post(self, request):
