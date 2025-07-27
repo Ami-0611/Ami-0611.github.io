@@ -1,15 +1,19 @@
+import os
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure, OperationFailure
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
 
 class AnimalShelter(object):
     """ CRUD operations for Animal collection in MongoDB """
 
     def __init__(self, username, password):
-        HOST = '127.0.0.1'
-        PORT = 27017
-        DB = 'AAC'
-        COL = 'animals'
+        # Load environment variables from the .env file
+        load_dotenv()
+        HOST = os.getenv("MONGO_HOST")
+        PORT = int(os.getenv("MONGO_PORT"))
+        DB = os.getenv("MONGO_DB")
+        COL = os.getenv("MONGO_COL")
 
         try:
             self.client = MongoClient(f'mongodb://{username}:{password}@{HOST}:{PORT}/?authSource={DB}')
