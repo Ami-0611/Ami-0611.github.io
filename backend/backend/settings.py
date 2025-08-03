@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,3 +133,25 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# MongoEngine Configuration
+import mongoengine
+
+# MongoDB connection settings
+MONGO_HOST = os.getenv("MONGO_HOST", "localhost")
+MONGO_PORT = int(os.getenv("MONGO_PORT", 27017))
+MONGO_DB = os.getenv("MONGO_DB", "AAC")
+MONGO_USERNAME = os.getenv("MONGO_USERNAME", "")
+MONGO_PASSWORD = os.getenv("MONGO_PASSWORD", "")
+
+# Connect to MongoDB
+if MONGO_USERNAME and MONGO_PASSWORD:
+    mongoengine.connect(
+        db=MONGO_DB,
+        host=f"mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/?authSource=AAC"
+    )
+else:
+    mongoengine.connect(
+        db=MONGO_DB,
+        host=f"mongodb://{MONGO_HOST}:{MONGO_PORT}"
+    )

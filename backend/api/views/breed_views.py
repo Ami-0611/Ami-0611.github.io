@@ -1,19 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from bson.objectid import ObjectId
-from api.mongo import get_collection
+from api.models import Breed
 from api.serializers import BreedSerializer
 
 # --- BREEDS ---
 class BreedListView(APIView):
     def get(self, request):
-        collection = get_collection("breeds")
-        breeds = [
-            {"_id": str(doc["_id"]), "name": doc["name"]}
-            for doc in collection.find()
-        ]
-        return Response(breeds)
+        breeds = Breed.objects.all()
+        breeds_data = [{"_id": str(breed.id), "name": breed.name} for breed in breeds]
+        return Response(breeds_data)
 
     def post(self, request):
         serializer = BreedSerializer(data=request.data)
@@ -21,11 +17,12 @@ class BreedListView(APIView):
             return Response(serializer.errors, status=400)
         name = serializer.validated_data["name"]
 
-        collection = get_collection("breeds")
-        if collection.find_one({"name": name}):
+        if Breed.objects.filter(name=name).exists():
             return Response({"error": "Breed already exists"}, status=409)
-        result = collection.insert_one({"name": name})
-        return Response({"message": "Breed added", "id": str(result.inserted_id)}, status=201)
+        
+        breed = Breed(name=name)
+        breed.save()
+        return Response({"message": "Breed added", "id": str(breed.id)}, status=201)
 
     def put(self, request):
         serializer = BreedSerializer(data=request.data)
@@ -37,19 +34,22 @@ class BreedListView(APIView):
         if not breed_id:
             return Response({"error": "_id is required"}, status=400)
 
-        collection = get_collection("breeds")
-        result = collection.update_one({"_id": ObjectId(breed_id)}, {"$set": {"name": new_name}})
-        if result.matched_count == 0:
+        try:
+            breed = Breed.objects.get(id=breed_id)
+            breed.name = new_name
+            breed.save()
+            return Response({"message": "Breed updated"})
+        except Breed.DoesNotExist:
             return Response({"error": "Breed not found"}, status=404)
-        return Response({"message": "Breed updated"})
 
     def delete(self, request):
         breed_id = request.data.get("_id")
         if not breed_id:
             return Response({"error": "_id is required"}, status=400)
 
-        collection = get_collection("breeds")
-        result = collection.delete_one({"_id": ObjectId(breed_id)})
-        if result.deleted_count == 0:
+        try:
+            breed = Breed.objects.get(id=breed_id)
+            breed.delete()
+            return Response({"message": "Breed deleted"})
+        except Breed.DoesNotExist:
             return Response({"error": "Breed not found"}, status=404)
-        return Response({"message": "Breed deleted"})
