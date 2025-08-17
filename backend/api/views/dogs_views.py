@@ -2,12 +2,22 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Dog
 from api.serializers import DogSerializer
+from bson import ObjectId
 
 class DogListView(APIView):
-    def get(self, request):
-        dogs = Dog.objects.all()
-        dogs_data = []
-        for dog in dogs:
+    def get(self, request, dog_id=None):
+        if dog_id:
+            # Get specific dog by ID
+            try:
+                # Try to find by animal_id first
+                dog = Dog.objects.get(animal_id=dog_id)
+            except Dog.DoesNotExist:
+                try:
+                    # Try to find by MongoDB ObjectId
+                    dog = Dog.objects.get(id=ObjectId(dog_id))
+                except (Dog.DoesNotExist, ValueError):
+                    return Response({"error": "Dog not found"}, status=404)
+            
             dog_dict = {
                 "_id": str(dog.id),
                 "animal_id": dog.animal_id,
@@ -29,54 +39,119 @@ class DogListView(APIView):
                 "description": dog.description,
                 "status": dog.status
             }
-            dogs_data.append(dog_dict)
-        print(f"dogs count: {len(dogs_data)}")
-        return Response(dogs_data)
+            return Response(dog_dict)
+        else:
+            # Get all dogs
+            dogs = Dog.objects.all()
+            dogs_data = []
+            for dog in dogs:
+                dog_dict = {
+                    "_id": str(dog.id),
+                    "animal_id": dog.animal_id,
+                    "animal_type": dog.animal_type,
+                    "breed": dog.breed.name if dog.breed else None,
+                    "color": dog.color,
+                    "date_of_birth": dog.date_of_birth,
+                    "datetime": dog.datetime,
+                    "name": dog.name,
+                    "outcome_subtype": dog.outcome_subtype,
+                    "outcome_type": dog.outcome_type,
+                    "sex_upon_outcome": dog.sex_upon_outcome,
+                    "location_lat": dog.location_lat,
+                    "location_long": dog.location_long,
+                    "age_upon_outcome_in_weeks": dog.age_upon_outcome_in_weeks,
+                    "rescue_type": dog.rescue_type.name if dog.rescue_type else None,
+                    "age": dog.age,
+                    "weight": dog.weight,
+                    "description": dog.description,
+                    "status": dog.status
+                }
+                dogs_data.append(dog_dict)
+            print(f"dogs count: {len(dogs_data)}")
+            return Response(dogs_data)
 
     def post(self, request):
-        serializer = DogSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=400)
-
-        data = serializer.validated_data
+        # Validate required fields manually
+        if not request.data.get("animal_id"):
+            return Response({"error": "animal_id is required"}, status=400)
         
+        if not request.data.get("name"):
+            return Response({"error": "name is required"}, status=400)
+
         # Check if dog with this animal_id already exists
-        if Dog.objects.filter(animal_id=data["animal_id"]).exists():
+        try:
+            existing_dog = Dog.objects.get(animal_id=request.data["animal_id"])
             return Response({"error": "Dog with this animal_id already exists."}, status=409)
+        except Dog.DoesNotExist:
+            pass
+
+        # Prepare data with defaults
+        dog_data = {
+            "animal_id": request.data["animal_id"],
+            "name": request.data["name"],
+            "animal_type": request.data.get("animal_type", "Dog"),
+            "breed": request.data.get("breed", ""),
+            "color": request.data.get("color", ""),
+            "date_of_birth": request.data.get("date_of_birth", ""),
+            "datetime": request.data.get("datetime", ""),
+            "outcome_type": request.data.get("outcome_type", "Adoption"),
+            "outcome_subtype": request.data.get("outcome_subtype", ""),
+            "sex_upon_outcome": request.data.get("sex_upon_outcome", ""),
+            "location_lat": float(request.data.get("location_lat", 0)),
+            "location_long": float(request.data.get("location_long", 0)),
+            "age_upon_outcome_in_weeks": float(request.data.get("age_upon_outcome_in_weeks", 0)),
+            "rescue_type": request.data.get("rescue_type", ""),
+            "description": request.data.get("description", ""),
+        }
 
         # Create new dog using MongoEngine model
-        dog = Dog(**data)
+        dog = Dog(**dog_data)
         dog.save()
         
         return Response({"message": "Dog added", "id": str(dog.id)}, status=201)
 
-    def put(self, request):
+    def put(self, request, dog_id=None):
+        if not dog_id:
+            return Response({"error": "Dog ID is required"}, status=400)
+
         data = request.data
-        _id = data.get("_id")
-        if not _id:
-            return Response({"error": "_id is required"}, status=400)
-
-        serializer = DogSerializer(data=data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=400)
-
+        
+        # Try to find dog by animal_id first, then by MongoDB ObjectId
         try:
-            dog = Dog.objects.get(id=_id)
-            for field, value in serializer.validated_data.items():
-                setattr(dog, field, value)
-            dog.save()
-            return Response({"message": "Dog updated"})
+            dog = Dog.objects.get(animal_id=dog_id)
         except Dog.DoesNotExist:
-            return Response({"error": "Dog not found"}, status=404)
+            try:
+                dog = Dog.objects.get(id=ObjectId(dog_id))
+            except (Dog.DoesNotExist, ValueError):
+                return Response({"error": "Dog not found"}, status=404)
 
-    def delete(self, request):
-        _id = request.data.get("_id")
-        if not _id:
-            return Response({"error": "_id is required"}, status=400)
+        # Update only the fields that are provided in the request
+        updateable_fields = ['name', 'color', 'age_upon_outcome_in_weeks', 'sex_upon_outcome', 'date_of_birth']
+        
+        for field in updateable_fields:
+            if field in data:
+                setattr(dog, field, data[field])
+        
+        dog.save()
+        
+        return Response({
+            "message": "Dog updated successfully",
+            "id": str(dog.id),
+            "animal_id": dog.animal_id
+        })
 
+    def delete(self, request, dog_id=None):
+        if not dog_id:
+            return Response({"error": "Dog ID is required"}, status=400)
+
+        # Try to find dog by animal_id first, then by MongoDB ObjectId
         try:
-            dog = Dog.objects.get(id=_id)
-            dog.delete()
-            return Response({"message": "Dog deleted"})
+            dog = Dog.objects.get(animal_id=dog_id)
         except Dog.DoesNotExist:
-            return Response({"error": "Dog not found"}, status=404)
+            try:
+                dog = Dog.objects.get(id=ObjectId(dog_id))
+            except (Dog.DoesNotExist, ValueError):
+                return Response({"error": "Dog not found"}, status=404)
+
+        dog.delete()
+        return Response({"message": "Dog deleted successfully"})
