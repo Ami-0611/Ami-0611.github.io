@@ -1,4 +1,4 @@
-# ✅ api/serializers.py
+# api/serializers.py
 
 from rest_framework import serializers
 
@@ -8,7 +8,8 @@ class BreedSerializer(serializers.Serializer):
 
 class RescueTypeSerializer(serializers.Serializer):
     _id = serializers.CharField(required=False)
-    type = serializers.CharField(max_length=100)
+    name = serializers.CharField(max_length=100)
+    type = serializers.CharField(max_length=100, required=False)  # For backward compatibility
 
 class DogSerializer(serializers.Serializer):
     _id = serializers.CharField(required=False)

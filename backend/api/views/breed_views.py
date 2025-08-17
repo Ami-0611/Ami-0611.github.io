@@ -17,35 +17,44 @@ class BreedListView(APIView):
             return Response(serializer.errors, status=400)
         name = serializer.validated_data["name"]
 
-        if Breed.objects.filter(name=name).exists():
+        if Breed.objects.filter(name=name).count() > 0:
             return Response({"error": "Breed already exists"}, status=409)
         
         breed = Breed(name=name)
         breed.save()
         return Response({"message": "Breed added", "id": str(breed.id)}, status=201)
 
-    def put(self, request):
+    def put(self, request, breed_id=None):
+        # Handle both URL parameter and request body
+        if not breed_id:
+            breed_id = request.data.get("_id")
+        
+        if not breed_id:
+            return Response({"error": "Breed ID is required"}, status=400)
+
         serializer = BreedSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=400)
 
-        breed_id = serializer.validated_data.get("_id")
         new_name = serializer.validated_data.get("name")
-        if not breed_id:
-            return Response({"error": "_id is required"}, status=400)
+        if not new_name:
+            return Response({"error": "Name is required"}, status=400)
 
         try:
             breed = Breed.objects.get(id=breed_id)
             breed.name = new_name
             breed.save()
-            return Response({"message": "Breed updated"})
+            return Response({"message": "Breed updated", "id": str(breed.id), "name": breed.name})
         except Breed.DoesNotExist:
             return Response({"error": "Breed not found"}, status=404)
 
-    def delete(self, request):
-        breed_id = request.data.get("_id")
+    def delete(self, request, breed_id=None):
+        # Handle both URL parameter and request body
         if not breed_id:
-            return Response({"error": "_id is required"}, status=400)
+            breed_id = request.data.get("_id")
+        
+        if not breed_id:
+            return Response({"error": "Breed ID is required"}, status=400)
 
         try:
             breed = Breed.objects.get(id=breed_id)
