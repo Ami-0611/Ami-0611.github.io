@@ -10,4 +10,5 @@ urlpatterns = [
     path("rescue-types/", RescueTypeListView.as_view(), name="rescue-type-list"),
     path("rescue-types/<str:rescue_id>/", RescueTypeListView.as_view(), name="rescue-type-detail"),
     path('dogs/', DogListView.as_view(), name='dog-list'),
+    path('dogs/<str:dog_id>/', DogListView.as_view(), name='dog-detail'),
 ]
