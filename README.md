@@ -132,14 +132,14 @@ exit;
 
 Since the default configuration uses local MongoDB, a `.env` file is not required.
 
-If needed, you can create a `.env` file in the `backend/` directory to customize settings:
+`.env` file in the `backend/` directory to customize settings:
 
 ```bash
 MONGO_HOST=localhost
 MONGO_PORT=27017
 MONGO_DB=AAC
-MONGO_USERNAME=
-MONGO_PASSWORD=
+MONGO_USERNAME=your_username
+MONGO_PASSWORD=your_password
 ```
 
 ## Data Loading
@@ -153,7 +153,7 @@ cd backend
 python load_data.py
 ```
 
-**Note**: `load_data.py` references `../aac_shelter_outcomes.csv`, so the CSV file must be placed in the project root.
+**Note**: `load_data.py` references `../aac_shelter_outcomes.csv`, so the CSV file must be placed in the project root if you cannot find. 
 
 ## Running the Backend Server
 
@@ -161,7 +161,7 @@ python load_data.py
 python manage.py runserver
 ```
 
-The API will be available at `http://localhost:8000/`
+The API will be available at `http://localhost:8000/` or `http://127.0.0.1:8000/api/`
 
 ## API Endpoints
 
