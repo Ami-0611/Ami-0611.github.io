@@ -1,236 +1,423 @@
-# Animal Shelter Management System
+# CS 499 Final Project - Animal Shelter Management System
 
-A Django-based API for managing animal shelter data with MongoDB integration.
+Full-Stack Web app created with React for managing animal shelter data. React frontend and a Django REST API backend with an integration to MongoDB.
+
+## Project Overview
+
+This project turns a simple Jupyter notebook dashboard into a modern deployable web application. The enhancement showcases:
+
+- **Software Design & Engineering**: React.js frontend with Django REST API backend
+- **Algorithms & Data Structures**: Efficient sorting, filtering, and pagination algorithms
+- **Database Design**: MongoDB integration with MongoEngine ODM
 
 ## Project Structure
 
 ```
-project-root/
-│
-├── backend/          # Django backend API
-│   ├── api/         # Django app with models, views, serializers
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── urls.py
-│   │   └── views/
-│   │       ├── dogs_views.py
-│   │       ├── breed_views.py
-│   │       └── rescue_views.py
-│   ├── backend/     # Django project settings
-│   ├── load_data.py # Data loading script
-│   └── requirements.txt
-├── aac_shelter_outcomes.csv  # CSV data file
-└── README.md
+CS499/
+├── index.html                    # Portfolio website
+├── README.md                     # **This file (Setup Guide)**
+├── aac_shelter_outcomes.csv      # **Test data **
+├── originals/                    # Original artifacts
+│   ├── ProjectTwoDashboard.ipynb # Original Dash/Plotly dashboard
+│   ├── animal_shelter.py         # Basic MongoDB CRUD class
+│   └── aac_shelter_outcomes.csv  # Data source
+├── frontend/                     # React.js application
+│   ├── README.md                 # **Frontend User Guide**
+│   ├── src/
+│   │   ├── components/           # React components
+│   │   ├── context/              # State management
+│   │   ├── pages/                # Page components
+│   │   └── services/             # API services
+│   ├── package.json
+│   └── public/
+├── backend/                      # Django REST API
+│   ├── README.md                 # **Backend User Guide**
+│   ├── api/                      # Django app
+│   │   ├── models.py             # Database models
+│   │   ├── serializers.py        # API serializers
+│   │   ├── urls.py               # URL routing
+│   │   └── views/                # API views
+│   ├── backend/                  # Django settings
+│   ├── load_data.py              # Test Data loading script
+│   └── requirements.txt          # Python dependencies
+└── docs/                         # Project documentation
+    ├── CS 499 Module One Assignment Ami Akagi.docx
+    ├── 3-2 Milestone Two_ Enhancement One_ Software Design and Engineering.docx
+    ├── 4-2 Milestone Three Narrative.docx
+    └── 5-2 Milestone Four_ Enhancement Three_ Databases.docx
 ```
 
-## Prerequisites
+## Getting Started
 
-- **Python**: Version 3.10+
-- **Node.js**: Version 16+ (if frontend is included)
-- **MongoDB**: Local or cloud instance (Atlas)
-- **Git**: Installed for cloning repository
+### What You'll Need
 
-## Backend Setup
+Make sure you have the following installed on your system:
 
-### 1. Navigate to Backend Directory
+- **Python**: Version 3.8 or higher
+- **Node.js**: Version 18 or higher
+- **MongoDB**: Either a local installation or cloud instance
+- **Git**: For cloning the repository
+
+### Step 1: Get the Code
+
+First, clone the repository to your local machine:
 
 ```bash
+git clone https://github.com/Ami-0611/CS499.git
+cd CS499
+```
+
+### Step 2: Set Up the Backend
+
+The backend is a Django REST API that handles all the data operations. Here's how to get it running:
+
+```bash
+# Navigate to the backend directory
 cd backend
-```
 
-### 2. Create Virtual Environment
-
-```bash
+# Create a virtual environment to isolate dependencies
 python -m venv venv
-```
 
-### 3. Activate Virtual Environment
-
-**Mac/Linux:**
-
-```bash
+# Activate the virtual environment
+# On macOS/Linux:
 source venv/bin/activate
-```
 
-**Windows:**
-
-```bash
+# On Windows:
 venv\Scripts\activate
-```
 
-### 4. Install Dependencies
-
-```bash
+# Install all the required Python packages
 pip install -r requirements.txt
-```
 
-### 5. Check Django Configuration
-
-```bash
-python manage.py check
-```
-
-### 6. Run Migrations
-
-```bash
+# Set up the database tables
 python manage.py migrate
+
+# Load some sample data to get started
+# **Test Data**
+python load_data.py
+
+# Start the development server
+python manage.py runserver
 ```
+
+### Step 3: Set Up the Frontend
+
+The frontend is a React.js application that provides the user interface. Here's how to get it running:
+
+```bash
+# Navigate to the frontend directory
+cd frontend
+
+# Install all the required Node.js packages
+npm install
+
+# Start the development server
+npm start
+```
+
+### Step 4: Access Application
+
+Once both servers are running, you can access:
+
+- **Frontend Application**: http://localhost:3000
+- **Backend API**: http://localhost:8000/api/
+- **Portfolio Website**: Open `index.html` in your browser
+
+## Documentation
+
+### User Guides
+
+For detailed instructions on how to use the application:
+
+- **[Frontend User Guide](frontend/README.md)** - Everything you need to know about using the React.js application
+- **[Backend User Guide](backend/README.md)** - Complete guide for working with the Django REST API
+
+### API Documentation
+
+- **Interactive API Browser**: http://localhost:8000/api/ (when the backend is running)
+- **API Endpoints Reference**: See the [Backend User Guide](backend/README.md#api-endpoints) for detailed endpoint documentation
 
 ## MongoDB Setup
 
-### Install MongoDB Community Edition
+### Creating MongoDB Username and Password
 
-**macOS (using Homebrew):**
+If you don't know how to create a MongoDB username and password, follow these steps:
+
+#### **Step 1: Install MongoDB (if not already installed)**
+
+**For macOS (using Homebrew):**
 
 ```bash
-# Install Homebrew if not already installed
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
 # Install MongoDB
 brew tap mongodb/brew
 brew install mongodb-community
 
 # Start MongoDB service
-brew services start mongodb-community
+brew services start mongodb/brew/mongodb-community
 ```
 
-### Create Database and Collections
+**For Windows:**
 
-1. **Connect to MongoDB:**
+1. Download MongoDB Community Server from [mongodb.com](https://www.mongodb.com/try/download/community)
+2. Run the installer and follow the setup wizard
+3. MongoDB will be installed as a service and start automatically
+
+**For Linux:**
 
 ```bash
+# Import MongoDB public GPG key
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+
+# Create list file for MongoDB
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+# Update package database
+sudo apt-get update
+
+# Install MongoDB
+sudo apt-get install -y mongodb-org
+
+# Start MongoDB
+sudo systemctl start mongod
+sudo systemctl enable mongod
+```
+
+#### **Step 2: Connect to MongoDB**
+
+**Open MongoDB shell:**
+
+```bash
+# Connect to MongoDB (no authentication required initially)
 mongosh
 ```
 
-2. **Create and use database:**
+#### **Step 3: Create Database and User**
+
+Once you're in the MongoDB shell, run these commands:
 
 ```javascript
+// Switch to admin database
+use admin
+
+// Create a new database for your project
 use AAC
+
+// Create a user for your application
+db.createUser({
+  user: "aacuser", // this is your_mongo_username
+  pwd: "Password123", // this is your_mongo_password
+  roles: [
+    { role: "readWrite", db: "AAC" },
+    { role: "dbAdmin", db: "AAC" }
+  ]
+})
+
+// Test the connection
+db.auth("aacuser", "Password123")
+
+// Exit MongoDB shell
+exit
 ```
 
-3. **Create collections (optional - will be created automatically when data is inserted):**
+#### **Step 4: Enable Authentication**
 
-```javascript
-db.createCollection("dogs");
-db.createCollection("breeds");
-db.createCollection("rescue_types");
+**For macOS/Linux:**
+
+```bash
+# Stop MongoDB
+brew services stop mongodb/brew/mongodb-community
+
+# Edit MongoDB configuration
+sudo nano /usr/local/etc/mongod.conf
 ```
 
-4. **Verify collections:**
+**For Windows:**
 
-```javascript
-show collections
+1. Open MongoDB Compass or edit the configuration file manually
+2. The config file is usually at: `C:\Program Files\MongoDB\Server\6.0\bin\mongod.cfg`
+
+**Add authentication to config file:**
+
+```yaml
+security:
+  authorization: enabled
 ```
 
-5. **Exit MongoDB shell:**
+**Restart MongoDB:**
 
-```javascript
-exit;
+```bash
+# macOS/Linux
+brew services start mongodb/brew/mongodb-community
+
+# Windows: Restart MongoDB service from Services
 ```
 
-### Environment Configuration (Optional)
+#### **Step 5: Test Your Connection**
 
-Since the default configuration uses local MongoDB, a `.env` file is not required.
+```bash
+# Connect with authentication
+mongosh -u aacuser -p Password123 --authenticationDatabase AAC
+```
 
-`.env` file in the `backend/` directory to customize settings:
+#### **Alternative: Quick Setup (No Authentication)**
+
+If you want to skip authentication for development:
+
+1. **Don't create any users**
+2. **Don't enable authentication**
+3. **Use these settings in your .env file:**
 
 ```bash
 MONGO_HOST=localhost
 MONGO_PORT=27017
 MONGO_DB=AAC
-MONGO_USERNAME=your_username
-MONGO_PASSWORD=your_password
+MONGO_USERNAME=
+MONGO_PASSWORD=
 ```
 
-## Data Loading
+#### **Troubleshooting**
 
-### 1. Load Data
-
-The CSV file is already located in the project root, so it can be used as is.
+**If you get "Authentication failed":**
 
 ```bash
-cd backend
-python load_data.py
-```
-
-**Note**: `load_data.py` references `../aac_shelter_outcomes.csv`, so the CSV file must be placed in the project root if you cannot find. 
-
-## Running the Backend Server
-
-```bash
-python manage.py runserver
-```
-
-The API will be available at `http://localhost:8000/` or `http://127.0.0.1:8000/api/`
-
-## API Endpoints
-
-- `GET /api/dogs/` - List all dogs
-- `GET /api/breeds/` - List all breeds
-- `GET /api/rescue-types/` - List all rescue types
-
-**Base URL**: `http://localhost:8000/api/`
-
-## Troubleshooting
-
-### MongoDB Connection Issues
-
-1. **Check if MongoDB is running:**
-
-```bash
-# macOS
-brew services list | grep mongodb
-```
-
-2. **Test MongoDB connection:**
-
-```bash
+# Check if user exists
 mongosh
-# or
-mongo
+use AAC
+db.getUsers()
 ```
 
-3. **Check MongoDB logs:**
+**If MongoDB won't start:**
 
 ```bash
-# macOS
+# Check MongoDB status
+brew services list | grep mongodb
+
+# Check logs
 tail -f /usr/local/var/log/mongodb/mongo.log
 ```
 
-### Django Issues
-
-1. **Check Django settings:**
+**If you can't connect:**
 
 ```bash
-python manage.py check
+# Check if MongoDB is running
+ps aux | grep mongod
+
+# Check port 27017
+lsof -i :27017
 ```
 
-2. **Reset database (if needed):**
+### Environment Variables
+
+Create a `.env` file in the `backend/` directory with these settings:
 
 ```bash
+MONGO_HOST=localhost
+MONGO_PORT=27017
+MONGO_DB=AAC
+MONGO_USERNAME=your_mongo_username
+MONGO_PASSWORD=your_mongo_password
+```
+
+## Deployment
+
+### Deploying the Backend to Heroku
+
+1. **Create a new Heroku app:**
+
+```bash
+heroku create your-app-name
+```
+
+2. **Add MongoDB to your app:**
+
+```bash
+heroku addons:create mongolab:sandbox
+```
+
+3. **Deploy your code:**
+
+```bash
+git add .
+git commit -m "Deploy to Heroku"
+git push heroku main
+```
+
+### Deploying the Frontend to Netlify
+
+1. **Build the production version:**
+
+```bash
+cd frontend
+npm run build
+```
+
+2. **Deploy to Netlify:**
+
+- Simply drag the `build/` folder to Netlify, or
+- Connect your GitHub repository for automatic deployments
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+**If MongoDB won't connect:**
+
+```bash
+# Check if MongoDB is running
+brew services list | grep mongodb
+
+# Test the connection
+mongosh
+```
+
+**If Django gives you trouble:**
+
+```bash
+# Check your Django configuration
+python manage.py check
+
+# Reset the database if needed
 python manage.py flush
 ```
 
-3. **Check installed packages:**
+**If React isn't working:**
 
 ```bash
-pip list
+# Clear the npm cache
+npm cache clean --force
+
+# Reinstall all dependencies
+rm -rf node_modules package-lock.json
+npm install
 ```
 
-## Development
+### Performance Tips
 
-### Adding New Models
+**For the Backend:**
 
-1. Create models in `backend/api/models.py`
-2. Run migrations: `python manage.py makemigrations`
-3. Apply migrations: `python manage.py migrate`
+- Create database indexes on frequently queried fields
+- Cache API responses
+- Implement large dataset based pagination
 
-### API Development
+**For the Frontend:**
 
-- Views are in `backend/api/views/`
-  - `dogs_views.py` - Dog-related views
-  - `breed_views.py` - Breed-related views
-  - `rescue_views.py` - Rescue type views
-- Serializers are in `backend/api/serializers.py`
-- URLs are configured in `backend/api/urls.py`
-- Models are in `backend/api/models.py`
+- Use component memoization for expensive components
+- Implement lazy loading for large components
+- Optimize images and other assets
+
+## Additional Resources
+
+- [Django REST Framework Documentation](https://www.django-rest-framework.org/)
+- [React.js Documentation](https://reactjs.org/docs/)
+- [MongoDB Documentation](https://docs.mongodb.com/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+
+## About the Author
+
+**Ami Akagi** - CS 499 Final Project
+
+- Southern New Hampshire University
+- Computer Science Capstone
+
+## License
+
+This project was created for educational purposes as part of the CS 499 Final Project at Southern New Hampshire University.
