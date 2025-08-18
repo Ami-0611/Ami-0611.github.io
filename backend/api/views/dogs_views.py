@@ -1,7 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Dog
-from api.serializers import DogSerializer
 from bson import ObjectId
 
 class DogListView(APIView):
@@ -80,7 +79,6 @@ class DogListView(APIView):
 
         # Check if dog with this animal_id already exists
         try:
-            existing_dog = Dog.objects.get(animal_id=request.data["animal_id"])
             return Response({"error": "Dog with this animal_id already exists."}, status=409)
         except Dog.DoesNotExist:
             pass

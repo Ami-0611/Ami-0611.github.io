@@ -2,7 +2,7 @@ import csv
 import os
 import sys
 import django
-from datetime import datetime
+from api.models import Dog, Breed, RescueType
 
 # Add the backend directory to the Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -11,7 +11,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 django.setup()
 
-from api.models import Dog, Breed, RescueType
 
 def load_data():
     csv_file_path = '../aac_shelter_outcomes.csv'

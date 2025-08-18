@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+# MongoEngine Configuration
+import mongoengine
 
 load_dotenv()
 
@@ -134,8 +136,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# MongoEngine Configuration
-import mongoengine
+
 
 # MongoDB connection settings
 MONGO_HOST = os.getenv("MONGO_HOST", "localhost")
