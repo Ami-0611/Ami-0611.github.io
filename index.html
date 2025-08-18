@@ -3,12 +3,818 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ami Portfolio</title>
+    <title>Ami Akagi - CS 499 Final Portfolio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .section-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+      }
+      .section-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
   </head>
-  <body>
-    <h1>Hello, World!</h1>
-    <a href="https://github.com/Ami-0611/CS340" target="_blank"
-      >CS340 Project Two</a
-    >
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center"
+            >
+              <span class="text-white font-bold text-lg">A</span>
+            </div>
+            <h1 class="text-xl font-bold text-gray-800">Ami Akagi</h1>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="#home"
+              class="text-gray-600 hover:text-blue-600 transition-colors"
+              >Home</a
+            >
+            <a
+              href="#code-review"
+              class="text-gray-600 hover:text-blue-600 transition-colors"
+              >Code Review</a
+            >
+            <a
+              href="#artifacts"
+              class="text-gray-600 hover:text-blue-600 transition-colors"
+              >Artifacts</a
+            >
+            <a
+              href="#narratives"
+              class="text-gray-600 hover:text-blue-600 transition-colors"
+              >Narratives</a
+            >
+            <a
+              href="#contact"
+              class="text-gray-600 hover:text-blue-600 transition-colors"
+              >Contact</a
+            >
+          </div>
+          <div class="md:hidden">
+            <button id="mobile-menu-btn" class="text-gray-600">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-4 py-2 space-y-2">
+          <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600"
+            >Home</a
+          >
+          <a
+            href="#code-review"
+            class="block py-2 text-gray-600 hover:text-blue-600"
+            >Code Review</a
+          >
+          <a
+            href="#artifacts"
+            class="block py-2 text-gray-600 hover:text-blue-600"
+            >Artifacts</a
+          >
+          <a
+            href="#narratives"
+            class="block py-2 text-gray-600 hover:text-blue-600"
+            >Narratives</a
+          >
+          <a
+            href="#contact"
+            class="block py-2 text-gray-600 hover:text-blue-600"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white pt-24 pb-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6">
+            CS 499 Final Portfolio
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-blue-100">
+            Professional ePortfolio Showcasing Computer Science Excellence
+          </p>
+          <div
+            class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6"
+          >
+            <a
+              href="#artifacts"
+              class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
+              View Artifacts
+            </a>
+            <a
+              href="#code-review"
+              class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+            >
+              Watch Code Review
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Self-Assessment -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="section-fade">
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Professional Self-Assessment
+          </h2>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              During my time in the computer science program at SNHU, I had
+              several phases of evolution that rearranged some industries. an
+              extensive skill set leading across software engineering,
+              algorithms, databases, and security. This portfolio not only my
+              technical skills but my evolution as a computer science problem
+              solver and collaborator.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">
+              Technical Growth & Expertise
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Working with others has been one of the most important parts of my
+              education. Group projects taught me how essential communication
+              is, especially when different people have different ideas about
+              how to approach a problem. I learned how to explain my thought
+              process, give and receive code reviews, and make sure that my work
+              was clear and well-documented. These experiences reminded me that
+              writing good code is not enough by itself—software development is
+              ultimately a team effort.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">
+              Software Engineering & Design
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              When I was first learning, I focused only on getting something to
+              work. Later, I realized that the design of the project mattered
+              just as much. Working with Django and React gave me the chance to
+              try that out, since those frameworks almost force you to think
+              about structure and long-term growth. The artifacts I chose for
+              this portfolio show how I took basic implementations and refined
+              them into applications that were closer to production-level
+              quality.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">
+              Algorithms & Data Structures
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              I also grew stronger in algorithms and data structures, which
+              pushed me to think about efficiency and trade-offs. Having
+              implemented sorting algorithms, designed data structures for
+              performance or experienced the different trade-offs, and chose a
+              way to solve the problem, jobs as simple as that are great. Such a
+              skill really helped in real projects and in coursework as well,
+              because very often the performance of our solutions was an issue
+              that determined whether they are practical.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">
+              Database Design & Management
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Databases were the next area I got confidence in. I worked with
+              variety of SQL, NoSQL databases, designing schemas, performing
+              CRUD operations and dealing with real world data that's not always
+              clean or consistent. Especially with work on MongoDB this taught
+              me how to manage relationships between complex data objects and
+              common issues like duplicate entries and validation. I had to be
+              very considerate of the way data is structured and integrity.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">
+              Security Mindset
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Security kept coming back too. It was kind of everywhere in my
+              projects. I got in the habit of checking inputs, making sure login
+              worked the way it should, and not leaving sensitive stuff exposed.
+              At first I missed a lot of little things, but once I forced myself
+              to look for problems earlier, the apps came out tougher and more
+              reliable.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">
+              Portfolio Integration
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Looking back at the portfolio as a whole, it feels like the pieces
+              fit into a bigger story. I started with small stuff, like putting
+              together a data dashboard just to see if I could. Later, I was
+              building full-stack apps that pulled together all kinds of
+              different tools. Every stage was less about patching one issue and
+              more about stretching into areas I hadn’t tackled before. Put
+              together, the projects highlight my growth, while also showing
+              that I still have room to keep sharpening my problem-solving
+              skills and how I collaborate with people.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Review Section -->
+    <section id="code-review" class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="section-fade">
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Code Review Video
+          </h2>
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            <div class="text-center">
+              <div
+                class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-play text-3xl text-blue-600"></i>
+              </div>
+
+              <p class="text-gray-600 mb-6">
+                This 5-minute presentation provides a comprehensive walkthrough
+                of the original code analysis, planned enhancements, and
+                technical improvements across software engineering, algorithms,
+                and databases.
+              </p>
+
+              <div class="bg-gray-100 rounded-lg p-6 mb-6 text-left">
+                <h4 class="font-semibold mb-4 text-gray-800">
+                  Code Review Presentation Structure:
+                </h4>
+
+                <div class="space-y-4">
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium text-gray-800 mb-2">
+                      Project Overview & Goals
+                    </h5>
+                  </div>
+
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium text-gray-800 mb-2">
+                      Enhancement:Database Design
+                    </h5>
+                  </div>
+
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium text-gray-800 mb-2">
+                      Enhancement: Backend Architecture
+                    </h5>
+                  </div>
+
+                  <div class="border-l-4 border-orange-500 pl-4">
+                    <h5 class="font-medium text-gray-800 mb-2">
+                      Enhancement: Frontend User Experience
+                    </h5>
+                  </div>
+
+                  <div class="border-l-4 border-red-500 pl-4">
+                    <h5 class="font-medium text-gray-800 mb-2">
+                      Technical Enhancements Throughout
+                    </h5>
+                  </div>
+
+                  <div class="border-l-4 border-teal-500 pl-4">
+                    <h5 class="font-medium text-gray-800 mb-2">
+                      Course Outcomes & Reflection
+                    </h5>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://youtu.be/hHIzlLkS7O0"
+                class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center"
+              >
+                <i class="fas fa-video mr-2"></i>
+                Watch Code Review Video
+              </a>
+              <p class="text-sm text-gray-500 mt-4">
+                <i class="fas fa-info-circle mr-1"></i>
+                Video hosted on YouTube - Click to view full presentation
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifacts Section -->
+    <section id="artifacts" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="section-fade">
+          <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            Technical Artifacts
+          </h2>
+
+          <!-- Original Artifacts -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6 text-gray-800">
+              Original Artifacts
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="bg-gray-50 rounded-lg p-6 card-hover">
+                <div class="flex items-center mb-4">
+                  <div
+                    class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4"
+                  >
+                    <i class="fas fa-chart-line text-orange-600 text-xl"></i>
+                  </div>
+                  <h4 class="text-lg font-semibold text-gray-800">
+                    Project Two Dashboard
+                  </h4>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  Original Jupyter notebook dashboard using Dash and Plotly for
+                  data visualization and interactive filtering of animal shelter
+                  data.
+                </p>
+                <div class="flex space-x-2">
+                  <span
+                    class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm"
+                    >Python</span
+                  >
+                  <span
+                    class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm"
+                    >Dash</span
+                  >
+                  <span
+                    class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm"
+                    >Plotly</span
+                  >
+                </div>
+                <a
+                  href="originals/ProjectTwoDashboard.ipynb"
+                  class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  View Original Code
+                  <i class="fas fa-external-link-alt ml-1"></i>
+                </a>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-6 card-hover">
+                <div class="flex items-center mb-4">
+                  <div
+                    class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4"
+                  >
+                    <i class="fas fa-database text-blue-600 text-xl"></i>
+                  </div>
+                  <h4 class="text-lg font-semibold text-gray-800">
+                    Animal Shelter Class
+                  </h4>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  MongoDB CRUD operations class providing database interface for
+                  animal shelter data management with error handling and
+                  connection management.
+                </p>
+                <div class="flex space-x-2">
+                  <span
+                    class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                    >Python</span
+                  >
+                  <span
+                    class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                    >MongoDB</span
+                  >
+                  <span
+                    class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                    >PyMongo</span
+                  >
+                </div>
+                <a
+                  href="originals/animal_shelter.py"
+                  class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  View Original Code
+                  <i class="fas fa-external-link-alt ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Artifacts -->
+          <div>
+            <h3 class="text-2xl font-semibold mb-6 text-gray-800">
+              Enhanced Artifacts
+            </h3>
+            <div
+              class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-8 card-hover"
+            >
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg flex items-center justify-center mr-6"
+                >
+                  <i class="fas fa-rocket text-white text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-2xl font-bold text-gray-800">
+                    Full-Stack Animal Shelter Application
+                  </h4>
+                  <p class="text-gray-600">
+                    Modern web application with enhanced user experience and
+                    comprehensive functionality
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white rounded-lg p-4">
+                  <div class="flex items-center mb-3">
+                    <i class="fab fa-react text-blue-500 text-xl mr-2"></i>
+                    <h5 class="font-semibold text-gray-800">
+                      Frontend (React)
+                    </h5>
+                  </div>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Modern UI with Tailwind CSS</li>
+                    <li>• Interactive data tables</li>
+                    <li>• Real-time filtering & sorting</li>
+                    <li>• Google Maps integration</li>
+                    <li>• Responsive design</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                  <div class="flex items-center mb-3">
+                    <i class="fab fa-python text-green-500 text-xl mr-2"></i>
+                    <h5 class="font-semibold text-gray-800">
+                      Backend (Django)
+                    </h5>
+                  </div>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• RESTful API endpoints</li>
+                    <li>• MongoDB integration</li>
+                    <li>• Data validation</li>
+                    <li>• CRUD operations</li>
+                    <li>• Error handling</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                  <div class="flex items-center mb-3">
+                    <i class="fas fa-database text-purple-500 text-xl mr-2"></i>
+                    <h5 class="font-semibold text-gray-800">Database</h5>
+                  </div>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• MongoDB with MongoEngine</li>
+                    <li>• Relational design</li>
+                    <li>• Index optimization</li>
+                    <li>• Data integrity</li>
+                    <li>• Scalable schema</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                  >React.js</span
+                >
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                  >Django</span
+                >
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                  >MongoDB</span
+                >
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                  >Tailwind CSS</span
+                >
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                  >REST API</span
+                >
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                  >Google Maps</span
+                >
+              </div>
+
+              <div class="flex space-x-4">
+                <a
+                  href="frontend/"
+                  class="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                >
+                  View Frontend Code
+                </a>
+                <a
+                  href="backend/"
+                  class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  View Backend Code
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Narratives Section -->
+    <section id="narratives" class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="section-fade">
+          <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            Enhancement Narratives
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Software Design & Engineering -->
+            <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-code text-blue-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Software Design & Engineering
+                </h3>
+              </div>
+              <p class="text-gray-600 mb-4">
+                This enhancement transformed the original Jupyter notebook
+                dashboard into a modern, full-stack web application. The
+                transition from Dash/Plotly to React.js and Django demonstrates
+                advanced software engineering principles including modular
+                architecture, component-based design, and separation of
+                concerns.
+              </p>
+              <div class="bg-blue-50 rounded-lg p-4 mb-4">
+                <h4 class="font-semibold mb-2 text-gray-800">
+                  Key Improvements:
+                </h4>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>
+                    • Modern React.js frontend with component-based architecture
+                  </li>
+                  <li>
+                    • Django REST API backend with proper separation of concerns
+                  </li>
+                  <li>• Responsive design with Tailwind CSS</li>
+                  <li>• Enhanced user experience with real-time updates</li>
+                  <li>• Scalable and maintainable codebase</li>
+                </ul>
+              </div>
+              <a
+                href="docs/3-2 Milestone Two_ Enhancement One_ Software Design and Engineering.docx"
+                download
+                class="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Download Full Narrative <i class="fas fa-download ml-1"></i>
+              </a>
+            </div>
+
+            <!-- Algorithms & Data Structures -->
+            <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-sort text-green-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">
+                  Algorithms & Data Structures
+                </h3>
+              </div>
+              <p class="text-gray-600 mb-4">
+                The enhanced application implements efficient algorithms for
+                data processing, sorting, filtering, and pagination. Advanced
+                data structures are used to optimize performance and provide
+                smooth user interactions.
+              </p>
+              <div class="bg-green-50 rounded-lg p-4 mb-4">
+                <h4 class="font-semibold mb-2 text-gray-800">
+                  Key Improvements:
+                </h4>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>
+                    • Efficient sorting algorithms with multiple field support
+                  </li>
+                  <li>• Advanced filtering with complex query optimization</li>
+                  <li>• Pagination algorithms for large datasets</li>
+                  <li>• Optimized data structures for performance</li>
+                  <li>• Real-time search and filtering capabilities</li>
+                </ul>
+              </div>
+              <a
+                href="docs/4-2 Milestone Three Narrative.docx"
+                download
+                class="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Download Full Narrative <i class="fas fa-download ml-1"></i>
+              </a>
+            </div>
+
+            <!-- Databases -->
+            <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-database text-purple-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Databases</h3>
+              </div>
+              <p class="text-gray-600 mb-4">
+                The database enhancement includes advanced MongoDB integration
+                with proper schema design, indexing strategies, and data
+                validation. The system now supports complex queries, data
+                relationships, and efficient data retrieval.
+              </p>
+              <div class="bg-purple-50 rounded-lg p-4 mb-4">
+                <h4 class="font-semibold mb-2 text-gray-800">
+                  Key Improvements:
+                </h4>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>• Advanced MongoDB schema with MongoEngine ODM</li>
+                  <li>• Optimized indexing for query performance</li>
+                  <li>• Data validation and integrity constraints</li>
+                  <li>• Complex aggregation queries</li>
+                  <li>• Efficient CRUD operations with error handling</li>
+                </ul>
+              </div>
+              <a
+                href="docs/5-2 Milestone Four_ Enhancement Three_ Databases.docx"
+                download
+                class="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Download Full Narrative <i class="fas fa-download ml-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="section-fade">
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Contact & Additional Information
+          </h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4 text-gray-800">
+                Project Information
+              </h3>
+              <div class="space-y-3 text-gray-600">
+                <div class="flex items-center">
+                  <i class="fas fa-graduation-cap text-blue-600 mr-3"></i>
+                  <span>CS 499 - Computer Science Capstone</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-university text-blue-600 mr-3"></i>
+                  <span>Southern New Hampshire University</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-user text-blue-600 mr-3"></i>
+                  <span>Ami Akagi</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4 text-gray-800">
+                Technical Stack
+              </h3>
+              <div class="space-y-3 text-gray-600">
+                <div class="flex items-center">
+                  <i class="fab fa-react text-blue-500 mr-3"></i>
+                  <span>React.js Frontend</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fab fa-python text-green-500 mr-3"></i>
+                  <span>Django Backend</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-database text-purple-500 mr-3"></i>
+                  <span>MongoDB Database</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fab fa-github text-gray-800 mr-3"></i>
+                  <span>GitHub Version Control</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-8">
+            <a
+              href="https://github.com/Ami-0611/Ami-0611.github.io.git"
+              target="_blank"
+              class="bg-gray-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors inline-flex items-center"
+            >
+              <i class="fab fa-github mr-2"></i>
+              View GitHub Repository
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-gray-300">© 2025 Ami Akagi - CS 499 Final Portfolio</p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      document
+        .getElementById("mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".section-fade").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Add active state to navigation links
+      window.addEventListener("scroll", function () {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= sectionTop - 200) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("text-blue-600");
+          link.classList.add("text-gray-600");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.remove("text-gray-600");
+            link.classList.add("text-blue-600");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
